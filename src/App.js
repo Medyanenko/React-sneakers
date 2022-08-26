@@ -1,39 +1,44 @@
+import React from "react";
 import Card from "./components/Card/Card";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
 
-const arr = [
-  {
-    title: "Чоловічі кросівки Nike Blazer Mid Suede",
-    price: "1200",
-    imgUrl: "/img/sneakers/1.jpg",
-    alt: "Nike",
-  },
-  {
-    title: "Жіночі кросівки Nike Blazer Mid Suede",
-    price: "12500",
-    imgUrl: "/img/sneakers/2.jpg",
-    alt: "Nike",
-  },
-  {
-    title: "Чоловічі кросівки Nike Blazer Mid Suede",
-    price: "1100",
-    imgUrl: "/img/sneakers/3.jpg",
-    alt: "Nike",
-  },
-  {
-    title: "Жіночі кросівки Nike Blazer Mid Suede",
-    price: "11500",
-    imgUrl: "/img/sneakers/4.jpg",
-    alt: "Nike",
-  },
-];
-
 function App() {
+  const [cartOpened, setCartOpened] = React.useState(false);
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const onAddToCart = (obj) => {
+    setCartItems((prev) => [...prev, obj]);
+    // if (cartItems.length === 0) {
+    //   setCartItems((prev) => [...prev, obj]);
+    // } else {
+    //   cartItems.map((img) => {
+    //     if (img.imgUrl !== obj.imgUrl) {
+    //       setCartItems((prev) => [...prev, obj]);
+    //     }
+    //   });
+    // }
+  };
+
+  const onRemoveFromCart = ()=> {
+    console.log("click")
+  }
+  React.useEffect(() => {
+    fetch("https://63091d67f8a20183f76ecc98.mockapi.io/items")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened ? (
+        <Drawer items={cartItems} onRemove = {()=> onRemoveFromCart()} onClose={() => setCartOpened(false)} />
+      ) : null}
+      <Header onClickCart={() => setCartOpened(true)} />
       <div>Slider</div>
       <div className="content p-40">
         <div className="mb-40 d-flex align-center justify-between">
@@ -44,14 +49,15 @@ function App() {
           </div>
         </div>
 
-        <div className="d-flex">
-          {arr.map((obj) => (
+        <div className="d-flex flex-wrap">
+          {items.map((item) => (
             <Card
-              title={obj.title}
-              price={obj.price}
-              imgUrl={obj.imgUrl}
-              alt={obj.alt}
-              onClick={() => console.log(obj)}
+              title={item.title}
+              price={item.price}
+              imgUrl={item.imgUrl}
+              alt={item.alt}
+              onClickFavorite={() => console.log(item)}
+              onPlus={(obj) => onAddToCart(obj)}
             />
           ))}
         </div>
