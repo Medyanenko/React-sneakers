@@ -8,7 +8,6 @@ body {
 * {
   font-family: "Inter", sans-serif;
 }
-
 .wrapper {
   background: #ffffff;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
@@ -26,36 +25,6 @@ header {
 .content {
   h1 {
     margin: 0;
-  }
-}
-.card {
-  border: 1px solid #f8f8f8;
-  padding: 30px;
-  width: 220px;
-  border-radius: 40px;
-  margin-right: 30px;
-  transition: box-shadow 0.2s ease-in-out;
-  transform: 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06);
-    transform: translateY(-5px);
-  }
-  .favorite {
-    position: absolute;
-    cursor: pointer;
-  }
-  span {
-    text-transform: uppercase;
-    opacity: 0.5;
-    font-size: 13px;
-  }
-  b {
-    font-size: 12px;
-  }
-  h5 {
-    font-weight: 400;
-    font-size: 14px;
   }
 }
 .button {
