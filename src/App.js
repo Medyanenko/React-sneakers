@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import Card from "./components/Card/Card";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
@@ -7,23 +8,17 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
 
 
   const onAddToCart = (obj) => {
+    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/cart", obj)
     setCartItems((prev) => [...prev, obj]);
-    // if (cartItems.length === 0) {
-    //   setCartItems((prev) => [...prev, obj]);
-    // } else {
-    //   cartItems.map((img) => {
-    //     if (img.imgUrl !== obj.imgUrl) {
-    //       setCartItems((prev) => [...prev, obj]);
-    //     }
-    //   });
-    // }
   };
 
   const onRemoveFromCart = (id)=> {
+    axios.delete(`https://63091d67f8a20183f76ecc98.mockapi.io/cart/${id}`);
     setCartItems(cartItems.filter(obj => obj.id !== id))
   }
 
@@ -31,15 +26,24 @@ function App() {
     setSearchValue(event.target.value);
   }
 
+  const onAddToFavorite = (obj) => {
+    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/favorites", obj)
+    setFavorites((prev) => [...prev, obj]);
+  };
+  // const onRemoveFromFavorite = (id)=> {
+  //   axios.delete(`https://63091d67f8a20183f76ecc98.mockapi.io/favorites/${id}`);
+  //   setFavorites(cartItems.filter(obj => obj.id !== id))
+  // }
+
   React.useEffect(() => {
-    fetch("https://63091d67f8a20183f76ecc98.mockapi.io/items")
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setItems(json);
-      });
+    axios.get("https://63091d67f8a20183f76ecc98.mockapi.io/items").then((res) =>
+      setItems(res.data)
+    );
+    axios.get("https://63091d67f8a20183f76ecc98.mockapi.io/cart").then((res) =>
+    setCartItems(res.data)
+  )
   }, []);
+
 
   return (
     <div className="wrapper clear">
@@ -67,7 +71,7 @@ function App() {
               price={item.price}
               imgUrl={item.imgUrl}
               alt={item.alt}
-              onClickFavorite={() => console.log(item)}
+              onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCart(obj)}
             />
           ))}

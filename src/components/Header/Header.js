@@ -14,6 +14,9 @@ const Header = (props) => {
         <span> 1205 грн</span>
       </li>
       <li>
+        <img className="mr-20 cu-p" height={18} width={18} src="/img/heart.svg" alt="favorite" />
+      </li>
+      <li>
         <img height={18} width={18} src="/img/user.svg" alt="user" />
       </li>
     </ul>
