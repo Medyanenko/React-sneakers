@@ -13,8 +13,8 @@ const Drawer = ({ onClose, items = [], onRemove}) => {
         </h2>
 
         <div className="items">
-          {items.map((obj) => (
-            <div className="cartItem d-flex align-center mb-20">
+          {items.map((obj, id) => (
+            <div key={id} className="cartItem d-flex align-center mb-20">
               <div
                 style={{ backgroundImage: `url(${obj.imgUrl})` }}
                 className="cartItemImg"
@@ -24,7 +24,7 @@ const Drawer = ({ onClose, items = [], onRemove}) => {
                 <b>{obj.price} грн</b>
               </div>
               <img
-                onClick={onRemove}
+                onClick={() => onRemove(obj.id)}
                 className="removeBtn"
                 src="/img/btn-remove.svg"
                 alt="Remove"
