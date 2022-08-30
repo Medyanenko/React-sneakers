@@ -1,0 +1,86 @@
+[
+    {
+     "id": "1",
+     "title": "Puma X Aka Boku Future Rider",
+     "imgUrl": "img/sneakers/1.jpg",
+     "price": "12 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "2",
+     "title": "Nike Air Max 270",
+     "imgUrl": "img/sneakers/2.jpg",
+     "price": "12 599",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "3",
+     "title": "Nike Blazer Mid Suede",
+     "imgUrl": "img/sneakers/3.jpg",
+     "price": "10 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "4",
+     "title": "Nike Blazer Mid Suede",
+     "imgUrl": "img/sneakers/4.jpg",
+     "price": "8 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "5",
+     "title": "Under Armour Curry 8",
+     "imgUrl": "img/sneakers/5.jpg",
+     "price": "7 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "6",
+     "title": "Nike Kyrie 7",
+     "imgUrl": "img/sneakers/6.jpg",
+     "price": "15 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "7",
+     "title": "Jordan Air Jordan 11",
+     "imgUrl": "img/sneakers/7.jpg",
+     "price": "6 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "8",
+     "title": "Nike LeBron XVIII",
+     "imgUrl": "img/sneakers/8.jpg",
+     "price": "7 499",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "9",
+     "title": "Nike Kyrie Flytrap IV",
+     "imgUrl": "img/sneakers/9.jpg",
+     "price": "13 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "10",
+     "title": "Nike Blazer Mid Suede",
+     "imgUrl": "img/sneakers/10.jpg",
+     "price": "11 999",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "11",
+     "title": "Nike Lebron XVIII Low",
+     "imgUrl": "img/sneakers/8.jpg",
+     "price": "10 600",
+     "alt": "img sneakers"
+    },
+    {
+     "id": "12",
+     "title": "Nike Kyrie Flytrap IV",
+     "imgUrl": "img/sneakers/9.jpg",
+     "price": "11 999",
+     "alt": "img sneakers"
+    }
+   ]

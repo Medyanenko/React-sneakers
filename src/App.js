@@ -28,16 +28,23 @@ function App() {
     setSearchValue(event.target.value);
   };
 
-  const onAddToFavorite = (obj) => {
-    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/favorites", obj)
-    .then((res) => setFavorites((prev) => [...prev, res.data]));
-   
+  const onAddToFavorite = async (obj) => {
+    try {
+      if (favorites.find((favObj) => favObj.id === obj.id)) {
+        axios.delete(
+          `https://63091d67f8a20183f76ecc98.mockapi.io/favorites/${obj.id}`
+        );
+      } else {
+        const { data } = await axios.post(
+          "https://63091d67f8a20183f76ecc98.mockapi.io/favorites",
+          obj
+        );
+        setFavorites((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert("failed to add to list");
+    }
   };
-  // const onRemoveFromFavorite = (id)=> {
-  //   axios.delete(`https://63091d67f8a20183f76ecc98.mockapi.io/favorites/${id}`);
-  //   setFavorites(cartItems.filter(obj => obj.id !== id))
-  // }
-
   React.useEffect(() => {
     axios
       .get("https://63091d67f8a20183f76ecc98.mockapi.io/items")
@@ -61,7 +68,12 @@ function App() {
       ) : null}
       <Header onClickCart={() => setCartOpened(true)} />
       <Routes>
-        <Route path="/favorites" element={<Favorite items={favorites} />} />
+        <Route
+          path="/favorites"
+          element={
+            <Favorite items={favorites} onAddToFavorite={onAddToFavorite} />
+          }
+        />
         <Route
           path="/"
           element={

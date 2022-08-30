@@ -45,6 +45,7 @@ const Home = ({
               price={item.price}
               imgUrl={item.imgUrl}
               alt={item.alt}
+             // id={item.id}
               onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCart(obj)}
             />
