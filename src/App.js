@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Card from "./components/Card/Card";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
-import Favorite from "./components/Favorite/Favorite";
+import Home from "./pages/Home";
+import Favorite from "./pages/Favorite";
 
 function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
@@ -14,8 +14,9 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
 
   const onAddToCart = (obj) => {
-    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/cart", obj);
-    setCartItems((prev) => [...prev, obj]);
+    axios
+      .post("https://63091d67f8a20183f76ecc98.mockapi.io/cart", obj)
+      .then((res) => setCartItems((prev) => [...prev, res.data]));
   };
 
   const onRemoveFromCart = (id) => {
@@ -43,13 +44,13 @@ function App() {
     axios
       .get("https://63091d67f8a20183f76ecc98.mockapi.io/cart")
       .then((res) => setCartItems(res.data));
+    axios
+      .get("https://63091d67f8a20183f76ecc98.mockapi.io/favorites")
+      .then((res) => setFavorites(res.data));
   }, []);
 
   return (
     <div className="wrapper clear">
-      <Routes>
-        <Route path="/favorites" element={<Favorite />} />
-      </Routes>
       {cartOpened ? (
         <Drawer
           items={cartItems}
@@ -58,50 +59,22 @@ function App() {
         />
       ) : null}
       <Header onClickCart={() => setCartOpened(true)} />
-      <div>Slider</div>
-      <div className="content p-40">
-        <div className="mb-40 d-flex align-center justify-between">
-          <h1>
-            {searchValue
-              ? `Пошук за запитом: "${searchValue}"`
-              : "Всі кросівки"}
-          </h1>
-          <div className="search-block d-flex">
-            <img src="/img/search.svg" alt="Search" />
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              placeholder="Пошук..."
+      <Routes>
+        <Route path="/favorites" element={<Favorite items={favorites} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              searchValue={searchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              setSearchValue={setSearchValue}
+              items={items}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
             />
-            {searchValue && (
-              <img
-                onClick={() => setSearchValue("")}
-                className="clear cu-p"
-                src="/img/btn-remove.svg"
-                alt="Clear"
-              />
-            )}
-          </div>
-        </div>
-
-        <div className="d-flex flex-wrap">
-          {items
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item, id) => (
-              <Card
-                key={id}
-                title={item.title}
-                price={item.price}
-                imgUrl={item.imgUrl}
-                alt={item.alt}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-                onPlus={(obj) => onAddToCart(obj)}
-              />
-            ))}
-        </div>
-      </div>
+          }
+        />
+      </Routes>
     </div>
   );
 }
