@@ -29,8 +29,9 @@ function App() {
   };
 
   const onAddToFavorite = (obj) => {
-    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/favorites", obj);
-    setFavorites((prev) => [...prev, obj]);
+    axios.post("https://63091d67f8a20183f76ecc98.mockapi.io/favorites", obj)
+    .then((res) => setFavorites((prev) => [...prev, res.data]));
+   
   };
   // const onRemoveFromFavorite = (id)=> {
   //   axios.delete(`https://63091d67f8a20183f76ecc98.mockapi.io/favorites/${id}`);

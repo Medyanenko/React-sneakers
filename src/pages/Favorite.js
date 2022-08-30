@@ -15,6 +15,7 @@ const Favorite = ({ items }) => {
             price={item.price}
             imgUrl={item.imgUrl}
             alt={item.alt}
+            favorited={true}
           />
         ))}
       </div>
