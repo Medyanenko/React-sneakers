@@ -6,6 +6,7 @@ const Home = ({
   onChangeSearchInput,
   setSearchValue,
   items,
+  cartItems,
   onAddToFavorite,
   onAddToCart,
 }) => {
@@ -45,9 +46,10 @@ const Home = ({
               price={item.price}
               imgUrl={item.imgUrl}
               alt={item.alt}
-             // id={item.id}
+              id={item.id}
               onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCart(obj)}
+              added = {cartItems.some((obj) => Number(obj.id) === Number(item.id))}
             />
           ))}
       </div>

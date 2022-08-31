@@ -14,9 +14,18 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
 
   const onAddToCart = (obj) => {
-    axios
-      .post("https://63091d67f8a20183f76ecc98.mockapi.io/cart", obj)
-      .then((res) => setCartItems((prev) => [...prev, res.data]));
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      axios.delete(
+        `https://63091d67f8a20183f76ecc98.mockapi.io/cart/${obj.id}`
+      );
+      setCartItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(obj.id))
+      );
+    } else {
+      axios
+        .post("https://63091d67f8a20183f76ecc98.mockapi.io/cart", obj)
+        .then((res) => setCartItems((prev) => [...prev, res.data]));
+    }
   };
 
   const onRemoveFromCart = (id) => {
@@ -42,19 +51,27 @@ function App() {
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
-      alert("failed to add to list");
+      console.log("failed to add to list");
     }
   };
   React.useEffect(() => {
-    axios
-      .get("https://63091d67f8a20183f76ecc98.mockapi.io/items")
-      .then((res) => setItems(res.data));
-    axios
-      .get("https://63091d67f8a20183f76ecc98.mockapi.io/cart")
-      .then((res) => setCartItems(res.data));
-    axios
-      .get("https://63091d67f8a20183f76ecc98.mockapi.io/favorites")
-      .then((res) => setFavorites(res.data));
+    async function fetchData() {
+      const cartResponse = await axios.get(
+        "https://63091d67f8a20183f76ecc98.mockapi.io/cart"
+      );
+      const favoriteResponse = await axios.get(
+        "https://63091d67f8a20183f76ecc98.mockapi.io/favorites"
+      );
+      const itemsResponse = await axios.get(
+        "https://63091d67f8a20183f76ecc98.mockapi.io/items"
+      );
+      setCartItems(cartResponse.data);
+      setFavorites(favoriteResponse.data);
+      setItems(itemsResponse.data);
+
+    }
+    fetchData();
+    
   }, []);
 
   return (
@@ -84,6 +101,7 @@ function App() {
               items={items}
               onAddToFavorite={onAddToFavorite}
               onAddToCart={onAddToCart}
+              cartItems={cartItems}
             />
           }
         />

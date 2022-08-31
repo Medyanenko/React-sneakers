@@ -1,12 +1,12 @@
 import React from "react";
 import s from "./Card.module.scss";
 
-const Card = ({id, imgUrl, alt, title, price, onFavorite, onPlus, favorited=false}) => {
-  const [isAdded, setIsAdded] = React.useState(false);
+const Card = ({id, imgUrl, alt, title, price, onFavorite, onPlus, favorited=false, added=false}) => {
+  const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
   
   const onClickPlus = () => {
-    onPlus({imgUrl, alt, title, price});
+    onPlus({id, imgUrl, alt, title, price});
     setIsAdded(!isAdded);
   };
   const onClickFavorite = () => {
