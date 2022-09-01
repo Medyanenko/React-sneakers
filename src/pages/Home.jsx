@@ -9,7 +9,30 @@ const Home = ({
   cartItems,
   onAddToFavorite,
   onAddToCart,
+  isLoading,
 }) => {
+  const renderItems = () => {
+    return (
+      isLoading
+        ? Array(8).fill(<Card loading={isLoading}/>)
+        : items.filter((item) =>
+            item.title.toLowerCase().includes(searchValue.toLowerCase())
+          )
+    ).map((item, id) => (
+      <Card
+        key={id}
+        title={item.title}
+        price={item.price}
+        imgUrl={item.imgUrl}
+        alt={item.alt}
+        id={item.id}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        loading ={isLoading}
+      />
+    ));
+  };
   return (
     <div className="content p-40">
       <div className="mb-40 d-flex align-center justify-between">
@@ -34,25 +57,7 @@ const Home = ({
         </div>
       </div>
 
-      <div className="d-flex flex-wrap">
-        {items
-          .filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item, id) => (
-            <Card
-              key={id}
-              title={item.title}
-              price={item.price}
-              imgUrl={item.imgUrl}
-              alt={item.alt}
-              id={item.id}
-              onFavorite={(obj) => onAddToFavorite(obj)}
-              onPlus={(obj) => onAddToCart(obj)}
-              added = {cartItems.some((obj) => Number(obj.id) === Number(item.id))}
-            />
-          ))}
-      </div>
+      <div className="d-flex flex-wrap">{renderItems()}</div>
     </div>
   );
 };
