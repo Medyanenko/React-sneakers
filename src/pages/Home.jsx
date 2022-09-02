@@ -6,15 +6,15 @@ const Home = ({
   onChangeSearchInput,
   setSearchValue,
   items,
-  cartItems,
   onAddToFavorite,
   onAddToCart,
   isLoading,
 }) => {
+
   const renderItems = () => {
     return (
       isLoading
-        ? Array(8).fill(<Card loading={isLoading}/>)
+        ? Array(8).fill(<Card loading={isLoading}/>) 
         : items.filter((item) =>
             item.title.toLowerCase().includes(searchValue.toLowerCase())
           )
@@ -28,7 +28,6 @@ const Home = ({
         id={item.id}
         onFavorite={(obj) => onAddToFavorite(obj)}
         onPlus={(obj) => onAddToCart(obj)}
-        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading ={isLoading}
       />
     ));

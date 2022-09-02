@@ -13,7 +13,7 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
         </h2>
 
         {items.length > 0 ? (
-          <div>
+          <div className="d-flex flex-column flex">
             <div className="items">
               {items.map((obj, id) => (
                 <div key={id} className="cartItem d-flex align-center mb-20">
