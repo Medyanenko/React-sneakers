@@ -1,11 +1,14 @@
 import React from "react";
-import Info from "./../Info/Info";
 import axios from "axios";
+
+import Info from "./../Info/Info";
 import {useCart} from "./../../hooks/useCart"
+
+import s from "./Drawer.module.scss"
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const Drawer = ({ onClose, items = [], onRemove }) => {
+const Drawer = ({ onClose, items = [], onRemove, opened }) => {
   const {cartItems, setCartItems, totalPrice} = useCart()
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
@@ -36,8 +39,8 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
     setIsLoading(false);
   };
   return (
-    <div className="overlay">
-      <div className="drawer">
+    <div className={`${s.overlay} ${opened ? s.overlayVisible : ""}`}>
+      <div className={s.drawer}> 
         <h2 className="mb-30 d-flex justify-between">
           Кошик{" "}
           <img
@@ -50,7 +53,7 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
 
         {items.length > 0 ? (
           <div className="d-flex flex-column flex">
-            <div className="items">
+            <div className="items flex">
               {items.map((obj, id) => (
                 <div key={id} className="cartItem d-flex align-center mb-20">
                   <div
