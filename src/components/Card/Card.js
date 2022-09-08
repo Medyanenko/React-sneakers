@@ -14,7 +14,7 @@ const Card = ({
   favorited = false,
   loading = false,
 }) => {
-  const {isItemAdded} = React.useContext(AppContext);
+  const { isItemAdded } = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
   const onClickPlus = () => {
@@ -46,13 +46,15 @@ const Card = ({
       ) : (
         <div className={s.card}>
           <div className={s.favorite} onClick={onFavorite}>
-            <img
-              onClick={onClickFavorite}
-              src={
-                isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.png"
-              }
-              alt="Unliked"
-            />
+            {onFavorite && (
+              <img
+                onClick={onClickFavorite}
+                src={
+                  isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.png"
+                }
+                alt="Unliked"
+              />
+            )}
           </div>
           <img width={133} height={112} src={imgUrl} alt={alt} />
           <h5>{title}</h5>
@@ -61,12 +63,14 @@ const Card = ({
               <span>Ціна: </span>
               <b>{price} грн</b>
             </div>
-            <img
-              className={s.plus}
-              onClick={onClickPlus}
-              src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/plus.svg"}
-              alt="plus"
-            />
+            {onPlus && (
+              <img
+                className={s.plus}
+                onClick={onClickPlus}
+                src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/plus.svg"}
+                alt="plus"
+              />
+            )}
           </div>
         </div>
       )}

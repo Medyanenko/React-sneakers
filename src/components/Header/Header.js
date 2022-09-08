@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../App";
+import { useCart } from "./../../hooks/useCart";
+
 const Header = (props) => {
-  const {cartItems} = React.useContext(AppContext);
-  const totalPrice = cartItems.reduce((sum, obj) => parseInt(obj.price) + sum, 0);
+  const { totalPrice } = useCart();
   return (
     <header className="d-flex justify-between align-center p-40">
       <Link to={"/"} exact>
-      <div className="d-flex align-center">
-        <img height={40} width={40} src="/img/logo.png" alt="logo" />
-        <div>
-          <h3 className="text-uppercase">React Sneakers</h3>
-          <p className="opacity-5">Магазин найкращих кросівок</p>
+        <div className="d-flex align-center">
+          <img height={40} width={40} src="/img/logo.png" alt="logo" />
+          <div>
+            <h3 className="text-uppercase">React Sneakers</h3>
+            <p className="opacity-5">Магазин найкращих кросівок</p>
+          </div>
         </div>
-      </div>
       </Link>
       <ul className="d-flex">
         <li className="mr-30 cu-p" onClick={props.onClickCart}>
@@ -32,7 +32,9 @@ const Header = (props) => {
           </Link>
         </li>
         <li>
-          <img height={18} width={18} src="/img/user.svg" alt="user" />
+          <Link to={"/orders"} exact>
+            <img height={18} width={18} src="/img/user.svg" alt="orders" />
+          </Link>
         </li>
       </ul>
     </header>

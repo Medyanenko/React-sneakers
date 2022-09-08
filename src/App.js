@@ -5,6 +5,7 @@ import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
+import Orders from "./pages/Orders";
 
 export const AppContext = React.createContext({});
 
@@ -45,10 +46,10 @@ function App() {
       if (favorites.find((favObj) => favObj.id === obj.id)) {
         axios.delete(
           `https://63091d67f8a20183f76ecc98.mockapi.io/favorites/${obj.id}`
-        )
+        );
         setFavorites((prev) =>
-        prev.filter((item) => Number(item.id) !== Number(obj.id))
-      );;
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
       } else {
         const { data } = await axios.post(
           "https://63091d67f8a20183f76ecc98.mockapi.io/favorites",
@@ -80,11 +81,22 @@ function App() {
     fetchData();
   }, []);
 
-  const isItemAdded = (id) =>{
-    return cartItems.some((obj) => Number(obj.id) === Number(id))
-  }
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
   return (
-    <AppContext.Provider value={{ items, cartItems, favorites, isItemAdded, onAddToFavorite, setCartOpened, setCartItems }}>
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        favorites,
+        isItemAdded,
+        onAddToFavorite,
+        onAddToCart,
+        setCartOpened,
+        setCartItems,
+      }}
+    >
       <div className="wrapper clear">
         {cartOpened ? (
           <Drawer
@@ -95,12 +107,8 @@ function App() {
         ) : null}
         <Header onClickCart={() => setCartOpened(true)} />
         <Routes>
-          <Route
-            path="/favorites"
-            element={
-              <Favorite />
-            }
-          />
+          <Route path="/favorites" element={<Favorite />} />
+          <Route path="/orders" element={<Orders />} />
           <Route
             path="/"
             element={
