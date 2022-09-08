@@ -10,6 +10,7 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const totalPrice = cartItems.reduce((sum, obj) => parseInt(obj.price) + sum, 0);
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
@@ -75,12 +76,12 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
                 <li className="d-flex">
                   <span>Cума:</span>
                   <div></div>
-                  <b>20 000 грн</b>
+                  <b>{totalPrice} грн</b>
                 </li>
                 <li className="d-flex">
                   <span>Податок 7%:</span>
                   <div></div>
-                  <b>1075 грн</b>
+                  <b>{(totalPrice*0.07).toFixed(2)} грн</b>
                 </li>
               </ul>
               <button
