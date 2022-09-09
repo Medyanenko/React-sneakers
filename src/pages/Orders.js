@@ -13,11 +13,11 @@ const Orders = () => {
         const { data } = await axios.get(
           "https://63091d67f8a20183f76ecc98.mockapi.io/orders"
         );
-        // console.log(data.map((obj)=> obj.items.flat()));
+       // setOrders(data.map((obj)=> obj.items.flat()));
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
-        console.log("error order");
+        console.error("error order");
       }
     })();
   }, []);
@@ -29,19 +29,9 @@ const Orders = () => {
       </div>
 
       <div className="d-flex flex-wrap">
-        {isLoading
-          ? Array(8).fill(<Card loading={isLoading} />)
-          : orders.map((item, id) => (
-              <Card
-                key={id}
-                title={item.title}
-                price={item.price}
-                imgUrl={item.imgUrl}
-                alt={item.alt}
-                id={item.id}
-                loading={isLoading}
-              />
-            ))}
+      {(isLoading ? [...Array(12)] : orders).map((item, id) => {
+          return <Card key={id} loading={isLoading} {...item} />;
+        })}
         {!orders.length > 0 && !isLoading && (
           <Info
             title="У вас немає замовлень"

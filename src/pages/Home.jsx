@@ -26,7 +26,7 @@ const Home = ({
         imgUrl={item.imgUrl}
         alt={item.alt}
         id={item.id}
-        onFavorite={(obj) => onAddToFavorite(obj)}
+        onFavorite={onAddToFavorite}
         onPlus={(obj) => onAddToCart(obj)}
         loading ={isLoading}
       />
