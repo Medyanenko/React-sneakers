@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../components/Card/Card";
 import axios from "axios";
+import Info from "../components/Info/Info";
 
 const Orders = () => {
   const [orders, setOrders] = React.useState([]);
@@ -41,6 +42,13 @@ const Orders = () => {
                 loading={isLoading}
               />
             ))}
+        {!orders.length > 0 && !isLoading && (
+          <Info
+            title="У вас немає замовлень"
+            description="Щоб побачити свої товари, необхідно оформити замовлення."
+            img="/img/smile-down.svg"
+          />
+        )}
       </div>
     </div>
   );

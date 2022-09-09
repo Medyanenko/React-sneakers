@@ -6,7 +6,7 @@ const Header = (props) => {
   const { totalPrice } = useCart();
   return (
     <header className="d-flex justify-between align-center p-40">
-      <Link to={"/"} exact>
+      <Link to={"/"} exact="true">
         <div className="d-flex align-center">
           <img height={40} width={40} src="/img/logo.png" alt="logo" />
           <div>
@@ -21,7 +21,7 @@ const Header = (props) => {
           <span> {totalPrice} грн</span>
         </li>
         <li>
-          <Link to={"/favorites"} exact>
+          <Link to={"/favorites"} exact="true">
             <img
               className="mr-20 cu-p"
               height={18}
@@ -32,7 +32,7 @@ const Header = (props) => {
           </Link>
         </li>
         <li>
-          <Link to={"/orders"} exact>
+          <Link to={"/orders"} exact="true">
             <img height={18} width={18} src="/img/user.svg" alt="orders" />
           </Link>
         </li>
