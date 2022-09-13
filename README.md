@@ -7,8 +7,9 @@ I am glad to welcome you to my little online store of sneakers (optional, cars, 
 - filter products by name;
 - add and remove products to favorites;
 - add and remove items to the shopping cart;
-- make an order
-- view a list of your orders
+- calculate order amount;
+- make an order;
+- view a list of your orders.
 
 ## Used in development:
 - React JS v18;
