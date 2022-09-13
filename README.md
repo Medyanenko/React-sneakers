@@ -1,4 +1,4 @@
-# Hallo
+# Hello
 
 I am glad to welcome you to my little online store of sneakers (optional, cars, chocolates or whatever you think of yourself)
 [click here](https://medyanenko.github.io/sneaker-shop/).
