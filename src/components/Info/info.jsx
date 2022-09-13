@@ -19,7 +19,7 @@ const Info = ({img, title, description}) => {
             </p>
             <Link to="/">
             <button className="greenButton" onClick={()=>setCartOpened(false)}>
-              <img src="/img/arrow.svg" alt="Arrow" />
+              <img src="img/arrow.svg" alt="Arrow" />
               Повернутися
             </button>
             </Link>

@@ -51,7 +51,7 @@ const Card = ({
               <img
                 onClick={onClickFavorite}
                 src={
-                  isFavorite ? "/img/heart-liked.svg" : "/img/heart-unliked.png"
+                  isFavorite ? "img/heart-liked.svg" : "img/heart-unliked.png"
                 }
                 alt="Unliked"
               />
@@ -68,7 +68,7 @@ const Card = ({
               <img
                 className={s.plus}
                 onClick={onClickPlus}
-                src={isItemAdded(id) ? "/img/btn-checked.svg" : "/img/plus.svg"}
+                src={isItemAdded(id) ? "img/btn-checked.svg" : "img/plus.svg"}
                 alt="plus"
               />
             )}

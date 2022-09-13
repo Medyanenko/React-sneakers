@@ -32,7 +32,7 @@ const Favorite = () => {
           <Info
             title="У вас ще немає списку"
             description="Ви нічого не додали в список бажань"
-            img="/img/smile-sad.svg"
+            img="img/smile-sad.svg"
           />
         )}
       </div>

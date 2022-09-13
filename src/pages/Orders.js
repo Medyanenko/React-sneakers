@@ -36,7 +36,7 @@ const Orders = () => {
           <Info
             title="У вас немає замовлень"
             description="Щоб побачити свої товари, необхідно оформити замовлення."
-            img="/img/smile-down.svg"
+            img="img/smile-down.svg"
           />
         )}
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-  BrowserRouter,
+  HashRouter,
   Route,
   Routes
 } from "react-router-dom";
@@ -12,10 +12,10 @@ import "macro-css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 
-   <BrowserRouter>
+   <HashRouter>
       <Routes>  
         <Route  path='*'  element={<App />}/>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
 
 );
